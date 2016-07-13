@@ -10,3 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Dingo\Api\Routing\Router;
+
+/** @var Router $api */
+$api = app(Router::class);
+$api->version('v1', function (Router $api) {
+    $api->get('/', function() {
+        return ['Fruits' => 'Delicious and healthy!'];
+    });
+});
