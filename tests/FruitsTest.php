@@ -1,5 +1,6 @@
 <?php
 
+use App\Fruit;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -86,5 +87,18 @@ class FruitsTest extends TestCase
 
         $this->post('/api/fruits', $fruit, $this->headers($user))
             ->seeStatusCode(201);
+    }
+
+    /**
+     * @test
+     *
+     * Test: POST /api/fruits.
+     */
+    public function it_401s_when_not_authorized()
+    {
+        $fruit = Fruit::create(['name' => 'peache', 'color' => 'peache', 'weight' => 175, 'delicious' => true])->toArray();
+
+        $this->post('/api/fruits', $fruit)
+            ->seeStatusCode(401);
     }
 }
