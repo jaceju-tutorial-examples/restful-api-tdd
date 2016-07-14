@@ -15,9 +15,13 @@ use Dingo\Api\Routing\Router;
 /** @var Router $api */
 $api = app(Router::class);
 $api->version('v1', function (Router $api) {
-    $api->get('/', function() {
+    $api->get('/', function () {
         return ['Fruits' => 'Delicious and healthy!'];
     });
     $api->get('fruits', 'App\Http\Controllers\FruitsController@index');
     $api->get('fruit/{id}', 'App\Http\Controllers\FruitsController@show');
+
+    $api->post('authenticate', 'App\Http\Controllers\AuthenticateController@authenticate');
+    $api->post('logout', 'App\Http\Controllers\AuthenticateController@logout');
+    $api->get('token', 'App\Http\Controllers\AuthenticateController@getToken');
 });

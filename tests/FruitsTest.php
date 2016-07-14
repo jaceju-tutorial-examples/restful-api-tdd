@@ -59,4 +59,17 @@ class FruitsTest extends TestCase
                 ]
             ]);
     }
+
+    /**
+     * @test
+     *
+     * Test: GET /api/authenticate.
+     */
+    public function it_authenticate_a_user()
+    {
+        $user = factory(App\User::class)->create(['password' => bcrypt('foo')]);
+
+        $this->post('/api/authenticate', ['email' => $user->email, 'password' => 'foo'])
+            ->seeJsonStructure(['token']);
+    }
 }
