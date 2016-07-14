@@ -37,4 +37,23 @@ class FruitsController extends Controller
 
         return $this->response->errorBadRequest();
     }
+
+    /**
+     * Remove the specified fruit.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $fruit = Fruit::find($id);
+
+        if ($fruit) {
+            $fruit->delete();
+            return $this->response->noContent();
+        }
+
+        return $this->response->errorBadRequest();
+    }
 }
