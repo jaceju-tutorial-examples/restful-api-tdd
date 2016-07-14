@@ -72,4 +72,19 @@ class FruitsTest extends TestCase
         $this->post('/api/authenticate', ['email' => $user->email, 'password' => 'foo'])
             ->seeJsonStructure(['token']);
     }
+
+    /**
+     * @test
+     *
+     * Test: POST /api/fruits.
+     */
+    public function it_saves_a_fruit()
+    {
+        $user = factory(App\User::class)->create(['password' => bcrypt('foo')]);
+
+        $fruit = ['name' => 'peache', 'color' => 'peache', 'weight' => 175, 'delicious' => true];
+
+        $this->post('/api/fruits', $fruit, $this->headers($user))
+            ->seeStatusCode(201);
+    }
 }

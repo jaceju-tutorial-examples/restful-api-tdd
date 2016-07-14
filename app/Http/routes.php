@@ -25,3 +25,9 @@ $api->version('v1', function (Router $api) {
     $api->post('logout', 'App\Http\Controllers\AuthenticateController@logout');
     $api->get('token', 'App\Http\Controllers\AuthenticateController@getToken');
 });
+
+$api->version('v1', ['middleware' => 'api.auth'], function (Router $api) {
+    $api->get('authenticated_user', 'App\Http\Controllers\AuthenticateController@authenticatedUser');
+    $api->post('fruits', 'App\Http\Controllers\FruitsController@store');
+    $api->delete('fruits/{id}', 'App\Http\Controllers\FruitsController@destroy');
+});
