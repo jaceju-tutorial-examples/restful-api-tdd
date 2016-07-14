@@ -20,4 +20,22 @@ class FruitsTest extends TestCase
                 'Fruits' => 'Delicious and healthy!'
             ]);
     }
+
+    /**
+     * @test
+     *
+     * Test: GET /api/fruits.
+     */
+    public function it_fetches_fruits()
+    {
+        $this->seed('FruitsTableSeeder');
+        $this->get('/api/fruits')
+            ->seeJsonStructure([
+                'data' => [
+                    '*' => [
+                        'name', 'color', 'weight', 'delicious'
+                    ]
+                ]
+            ]);
+    }
 }
