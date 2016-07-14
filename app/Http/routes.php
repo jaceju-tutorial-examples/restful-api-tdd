@@ -18,4 +18,5 @@ $api->version('v1', function (Router $api) {
     $api->get('/', function() {
         return ['Fruits' => 'Delicious and healthy!'];
     });
+    $api->get('fruits', 'App\Http\Controllers\FruitsController@index');
 });
