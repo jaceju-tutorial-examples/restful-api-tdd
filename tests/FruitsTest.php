@@ -38,4 +38,25 @@ class FruitsTest extends TestCase
                 ]
             ]);
     }
+
+    /**
+     * @test
+     *
+     * Test: GET /api/fruit/1.
+     */
+    public function it_fetches_a_single_fruit()
+    {
+        $this->seed('FruitsTableSeeder');
+
+        $this->get('/api/fruit/1')
+            ->seeJson([
+                'data' => [
+                    'id'        => 1,
+                    'name'      => "Apple",
+                    'color'     => "Green",
+                    'weight'    => "150 grams",
+                    'delicious' => true
+                ]
+            ]);
+    }
 }

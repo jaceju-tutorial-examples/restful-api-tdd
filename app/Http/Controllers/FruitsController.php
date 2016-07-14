@@ -16,4 +16,15 @@ class FruitsController extends Controller
 
         return $this->collection($fruits, new FruitsTransformer);
     }
+
+    public function show($id)
+    {
+        $fruit = Fruit::find($id);
+
+        if ($fruit) {
+            return $this->item($fruit, new FruitsTransformer);
+        }
+
+        return $this->response->errorNotFound();
+    }
 }

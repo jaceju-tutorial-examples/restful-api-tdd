@@ -19,4 +19,5 @@ $api->version('v1', function (Router $api) {
         return ['Fruits' => 'Delicious and healthy!'];
     });
     $api->get('fruits', 'App\Http\Controllers\FruitsController@index');
+    $api->get('fruit/{id}', 'App\Http\Controllers\FruitsController@show');
 });
