@@ -101,4 +101,22 @@ class FruitsTest extends TestCase
         $this->post('/api/fruits', $fruit)
             ->seeStatusCode(401);
     }
+
+    /**
+     * @test
+     *
+     * Test: POST /api/fruits.
+     */
+    public function it_422_when_validation_fails()
+    {
+        $user = factory(App\User::class)->create(['password' => bcrypt('foo')]);
+
+        $fruit = ['name' => 'peache', 'color' => 'peache', 'weight' => 175, 'delicious' => true];
+
+        $this->post('/api/fruits', $fruit, $this->headers($user))
+            ->seeStatusCode(201);
+
+        $this->post('/api/fruits', $fruit, $this->headers($user))
+            ->seeStatusCode(422);
+    }
 }
