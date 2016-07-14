@@ -15,9 +15,6 @@ use Dingo\Api\Routing\Router;
 /** @var Router $api */
 $api = app(Router::class);
 $api->version('v1', function (Router $api) {
-    $api->get('/', function () {
-        return ['Fruits' => 'Delicious and healthy!'];
-    });
     $api->get('fruits', 'App\Http\Controllers\FruitsController@index');
     $api->get('fruit/{id}', 'App\Http\Controllers\FruitsController@show');
 
